@@ -118,7 +118,12 @@ var HashMap = (function() {
             return a == b;
         }
     }
-    
+
+    // function equals(a, b)
+		// {
+		// 		return a == b;
+		// }
+		
     function Entry(key, hash, value)
     {
         this._key = key;
@@ -571,10 +576,11 @@ var HashMap = (function() {
     return HashMap;
 })();
 
-function run() {
+function run(k) {
     var map = new HashMap();
-    var COUNT = 90000;
-
+    //var COUNT = 90000;
+		var COUNT = k === undefined? 900000:k;
+		
     for (var i = 0; i < COUNT; ++i)
         map.put(i, 42);
 
@@ -599,6 +605,18 @@ function run() {
     if (valueSum !== 42 * COUNT)
         throw "Error: valueSum = " + valueSum;
 }
+
+
+for (let k=90000; k < 100000; k += 10000) {
+		let begin = Date.now();
+		for (let i =0; i < 120; i++) {
+				run(k);
+		}
+		let total = (Date.now() - begin) * 10000 / k;
+	
+		print("total for " + k + " is :" + total);
+}
+
 
 class Benchmark {
     runIteration() {
